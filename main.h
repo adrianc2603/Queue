@@ -19,10 +19,10 @@ void enqueue(queue_t *queue, void *e);
 
 void *dequeue(queue_t *queue);
 
-void *first();
+void *first(queue_t *queue);
 
-int size();
+int size(queue_t *queue);
 
-bool is_empty();
+bool is_empty(queue_t *queue);
 
 void destroy_queue(queue_t *queue);
