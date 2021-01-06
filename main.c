@@ -17,7 +17,7 @@ queue_t *create_queue() {
 void enqueue(queue_t *queue, void *e) {
     if (queue == NULL) {
         printf("The queue is NULL\n");
-        return NULL;
+        return;
     }
     node_t *new_node = malloc(sizeof(node_t));
     new_node->element = e;
@@ -76,7 +76,7 @@ void *first(queue_t *queue) {
 int size(queue_t *queue) {
     if (queue == NULL) {
         printf("The queue is NULL\n");
-        return NULL;
+        return 0;
     }
     return queue->size;
 } 
