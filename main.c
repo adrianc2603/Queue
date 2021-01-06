@@ -2,6 +2,7 @@
 
 /**
  * Initialise the queue and all its fields. Return a pointer to it
+ * Time Complexity: O(1)
  */
 queue_t *create_queue() {
     queue_t *queue = malloc(sizeof(queue_t));
@@ -13,6 +14,7 @@ queue_t *create_queue() {
 
 /**
  * Inserts element e at the end of the queue
+ * Time Complexity: O(1)
  */
 void enqueue(queue_t *queue, void *e) {
     if (queue == NULL) {
@@ -36,6 +38,7 @@ void enqueue(queue_t *queue, void *e) {
 
 /**
  * Removes and returns the element at the front of the queue
+ * Time Complexity: O(1)
  */
 void *dequeue(queue_t *queue) {
     if (queue == NULL) {
@@ -57,6 +60,7 @@ void *dequeue(queue_t *queue) {
 
 /**
  * Returns the element at the front without removing it
+ * Time Complexity: O(1)
  */
 void *first(queue_t *queue) {
     if (queue == NULL) {
@@ -72,6 +76,7 @@ void *first(queue_t *queue) {
 
 /**
  * Returns the number of elements stored
+ * Time Complexity: O(1)
  */
 int size(queue_t *queue) {
     if (queue == NULL) {
@@ -83,6 +88,7 @@ int size(queue_t *queue) {
 
 /**
  * Returns whether elements are stored or not
+ * Time Complexity: O(1)
  */
 bool is_empty(queue_t *queue) {
     if (queue == NULL) {
@@ -94,6 +100,7 @@ bool is_empty(queue_t *queue) {
 
 /**
  * Free all memory associated with the queue
+ * Time Complexity: O(n)
  */
 void destroy_queue(queue_t *queue) {
     if (queue == NULL) {
