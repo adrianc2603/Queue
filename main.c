@@ -18,7 +18,6 @@ queue_t *create_queue() {
  */
 void enqueue(queue_t *queue, void *e) {
     if (queue == NULL) {
-        printf("The queue is NULL\n");
         return;
     }
     node_t *new_node = malloc(sizeof(node_t));
@@ -42,11 +41,9 @@ void enqueue(queue_t *queue, void *e) {
  */
 void *dequeue(queue_t *queue) {
     if (queue == NULL) {
-        printf("The queue is NULL\n");
         return NULL;
     }
     if (is_empty(queue)) {
-        printf("The queue is empty\n");
         return NULL;
     }
     node_t *rem_node = queue->head;
@@ -64,11 +61,9 @@ void *dequeue(queue_t *queue) {
  */
 void *first(queue_t *queue) {
     if (queue == NULL) {
-        printf("The queue is NULL\n");
         return NULL;
     }
     if (is_empty(queue)) {
-        printf("Queue is empty\n");
         return NULL;
     }
     return queue->head->element;
@@ -80,7 +75,6 @@ void *first(queue_t *queue) {
  */
 int size(queue_t *queue) {
     if (queue == NULL) {
-        printf("The queue is NULL\n");
         return 0;
     }
     return queue->size;
@@ -92,7 +86,6 @@ int size(queue_t *queue) {
  */
 bool is_empty(queue_t *queue) {
     if (queue == NULL) {
-        printf("The queue is NULL\n");
         return true;
     }
     return (queue->size == 0);
@@ -104,7 +97,6 @@ bool is_empty(queue_t *queue) {
  */
 void destroy_queue(queue_t *queue) {
     if (queue == NULL) {
-        printf("The queue is NULL\n");
         return;
     }
     while (!is_empty(queue)) {
