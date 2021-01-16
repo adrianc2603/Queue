@@ -19,6 +19,17 @@ void print_queue(queue_t *queue) {
     printf("\n\n");
 }
 
+/**
+ * Helper function to heap allocate an integer, enqueue the integer and
+ * return a pointer to the integer
+ */
+int *create_enqueue_element(queue_t *queue, int e) {
+    int *p = malloc(sizeof(int));
+    *p = e;
+    enqueue(queue, p);
+    return p;
+}
+
 void test_all_functions_regular_cases() {
     queue_t *queue = create_queue();
 
@@ -32,30 +43,28 @@ void test_all_functions_regular_cases() {
     printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 1 (True)
     print_queue(queue); // Prints nothing
 
-    int *a = malloc(sizeof(int));
-    *a = 2;
-    enqueue(queue, a);
+    // Insert 2
+    int *a = create_enqueue_element(queue, 2);
     printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 2
     printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 1
     printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
     print_queue(queue); // 2 - 
 
-    int *b = malloc(sizeof(int));
-    *b = 5;
-    enqueue(queue, b);
+    // Insert 6
+    int *b = create_enqueue_element(queue, 5);
     printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 2
     printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 2
     printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
     print_queue(queue); // 2 - 5 -
 
-    int *c = malloc(sizeof(int));
-    *c = 3;
-    enqueue(queue, c);
+    // Insert 3
+    int *c = create_enqueue_element(queue, 3);
     printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 2
     printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 3
     printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
     print_queue(queue); // 2 - 5 - 3 - 
 
+    // Remove 2
     int *rem_elem = (int*) dequeue(queue);
     printf("The removed element is %d\n", *rem_elem); // The removed element is 2
     printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 5
@@ -63,6 +72,7 @@ void test_all_functions_regular_cases() {
     printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
     print_queue(queue); // 5 - 3 - 
 
+    // Remove 5
     rem_elem = (int*) dequeue(queue);
     printf("The removed element is %d\n", *rem_elem); // The removed element is 5
     printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 3
@@ -70,6 +80,7 @@ void test_all_functions_regular_cases() {
     printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
     print_queue(queue); // 3 - 
 
+    // Remove 3
     rem_elem = (int*) dequeue(queue);
     printf("The removed element is %d\n", *rem_elem); // The removed element is 3
      if (first(queue) == NULL) {
@@ -82,6 +93,7 @@ void test_all_functions_regular_cases() {
     printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 1 (True);
     print_queue(queue); // Prints nothing
 
+    // Try to dequeue, but it's NULL as there is nothing in the list
     if (dequeue(queue) == NULL) {
         printf("Dequeue is NULL because the queue is empty\n"); // This should print
     }
@@ -89,6 +101,7 @@ void test_all_functions_regular_cases() {
         printf("Dequeue should be NULL, but it isn't");
     }
 
+    // Add back in to ensure destroy_queue frees all nodes and the queue itself
     printf("Adding a back in now\n");
     enqueue(queue, a);
     print_queue(queue); // 2 - 
