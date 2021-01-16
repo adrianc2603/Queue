@@ -1,0 +1,111 @@
+        -:    0:Source:main.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "main.h"
+        -:    2:
+        -:    3:/**
+        -:    4: * Initialise the queue and all its fields. Return a pointer to it
+        -:    5: * Time Complexity: O(1)
+        -:    6: */
+        1:    7:queue_t *create_queue() {
+        1:    8:    queue_t *queue = malloc(sizeof(queue_t));
+        1:    9:    queue->head = NULL;
+        1:   10:    queue->tail = NULL;
+        1:   11:    queue->size = 0;
+        1:   12:    return queue;
+        -:   13:}
+        -:   14:
+        -:   15:/**
+        -:   16: * Inserts element e at the end of the queue
+        -:   17: * Time Complexity: O(1)
+        -:   18: */
+        4:   19:void enqueue(queue_t *queue, void *e) {
+        4:   20:    if (queue == NULL) {
+    #####:   21:        return;
+        -:   22:    }
+        4:   23:    node_t *new_node = malloc(sizeof(node_t));
+        4:   24:    new_node->element = e;
+        4:   25:    new_node->next = NULL;
+        -:   26:
+        4:   27:    if (queue->head == NULL) {
+        2:   28:        queue->head = new_node;
+        -:   29:    }
+        -:   30:    else {
+        2:   31:        queue->tail->next = new_node;
+        -:   32:    }
+        -:   33:
+        4:   34:    queue->tail = new_node;
+        4:   35:    queue->size++;
+        -:   36:}
+        -:   37:
+        -:   38:/**
+        -:   39: * Removes and returns the element at the front of the queue
+        -:   40: * Time Complexity: O(1)
+        -:   41: */
+        5:   42:void *dequeue(queue_t *queue) {
+        5:   43:    if (queue == NULL) {
+    #####:   44:        return NULL;
+        -:   45:    }
+        5:   46:    if (is_empty(queue)) {
+        1:   47:        return NULL;
+        -:   48:    }
+        4:   49:    node_t *rem_node = queue->head;
+        4:   50:    void *rem_elem = queue->head->element;
+        4:   51:    queue->head = queue->head->next;
+        4:   52:    free(rem_node);
+        4:   53:    queue->size--;
+        4:   54:    return rem_elem;
+        -:   55:}
+        -:   56:
+        -:   57:
+        -:   58:/**
+        -:   59: * Returns the element at the front without removing it
+        -:   60: * Time Complexity: O(1)
+        -:   61: */
+        7:   62:void *first(queue_t *queue) {
+        7:   63:    if (queue == NULL) {
+    #####:   64:        return NULL;
+        -:   65:    }
+        7:   66:    if (is_empty(queue)) {
+        2:   67:        return NULL;
+        -:   68:    }
+        5:   69:    return queue->head->element;
+        -:   70:}
+        -:   71:
+        -:   72:/**
+        -:   73: * Returns the number of elements stored
+        -:   74: * Time Complexity: O(1)
+        -:   75: */
+        7:   76:int size(queue_t *queue) {
+        7:   77:    if (queue == NULL) {
+    #####:   78:        return 0;
+        -:   79:    }
+        7:   80:    return queue->size;
+        -:   81:} 
+        -:   82:
+        -:   83:/**
+        -:   84: * Returns whether elements are stored or not
+        -:   85: * Time Complexity: O(1)
+        -:   86: */
+       21:   87:bool is_empty(queue_t *queue) {
+       21:   88:    if (queue == NULL) {
+    #####:   89:        return true;
+        -:   90:    }
+       21:   91:    return (queue->size == 0);
+        -:   92:} 
+        -:   93:
+        -:   94:/**
+        -:   95: * Free all memory associated with the queue
+        -:   96: * Time Complexity: O(n)
+        -:   97: */
+        1:   98:void destroy_queue(queue_t *queue) {
+        1:   99:    if (queue == NULL) {
+    #####:  100:        return;
+        -:  101:    }
+        3:  102:    while (!is_empty(queue)) {
+        1:  103:        dequeue(queue);
+        -:  104:    }
+        1:  105:    free(queue);
+        -:  106:}
