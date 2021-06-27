@@ -64,36 +64,36 @@
         -:   59: * Returns the element at the front without removing it
         -:   60: * Time Complexity: O(1)
         -:   61: */
-        7:   62:void *first(queue_t *queue) {
-        7:   63:    if (queue == NULL) {
+        8:   62:void *first(queue_t *queue) {
+        8:   63:    if (queue == NULL) {
     #####:   64:        return NULL;
         -:   65:    }
-        7:   66:    if (is_empty(queue)) {
+        8:   66:    if (is_empty(queue)) {
         2:   67:        return NULL;
         -:   68:    }
-        5:   69:    return queue->head->element;
+        6:   69:    return queue->head->element;
         -:   70:}
         -:   71:
         -:   72:/**
         -:   73: * Returns the number of elements stored
         -:   74: * Time Complexity: O(1)
         -:   75: */
-        7:   76:int size(queue_t *queue) {
-        7:   77:    if (queue == NULL) {
+        8:   76:int size(queue_t *queue) {
+        8:   77:    if (queue == NULL) {
     #####:   78:        return 0;
         -:   79:    }
-        7:   80:    return queue->size;
+        8:   80:    return queue->size;
         -:   81:} 
         -:   82:
         -:   83:/**
         -:   84: * Returns whether elements are stored or not
         -:   85: * Time Complexity: O(1)
         -:   86: */
-       21:   87:bool is_empty(queue_t *queue) {
-       21:   88:    if (queue == NULL) {
+       23:   87:bool is_empty(queue_t *queue) {
+       23:   88:    if (queue == NULL) {
     #####:   89:        return true;
         -:   90:    }
-       21:   91:    return (queue->size == 0);
+       23:   91:    return (queue->size == 0);
         -:   92:} 
         -:   93:
         -:   94:/**
