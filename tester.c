@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "main.h"
 
 /**
@@ -33,78 +34,65 @@ int *create_enqueue_element(queue_t *queue, int e) {
 void test_all_functions_regular_cases() {
     queue_t *queue = create_queue();
 
-    if (first(queue) == NULL) {
-        printf("First is NULL because the queue is empty\n"); // This should print
-    }
-    else {
-        printf("First is not NULL, but it should be");
-    }
-    printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 0
-    printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 1 (True)
+    assert(first(queue) == NULL);
+    assert(size(queue) == 0);
+    assert(is_empty(queue) == true);
     print_queue(queue); // Prints nothing
 
     // Insert 2
     int *a = create_enqueue_element(queue, 2);
-    printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 2
-    printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 1
-    printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
+    assert((*(int*) first(queue)) == 2);
+    assert(size(queue) == 1);
+    assert(is_empty(queue) == false);
     print_queue(queue); // 2 - 
 
     // Insert 6
     int *b = create_enqueue_element(queue, 5);
-    printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 2
-    printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 2
-    printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
+    assert((*(int*) first(queue)) == 2);
+    assert(size(queue) == 2);
+    assert(is_empty(queue) == false);
     print_queue(queue); // 2 - 5 -
 
     // Insert 3
     int *c = create_enqueue_element(queue, 3);
-    printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 2
-    printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 3
-    printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
+    assert((*(int*) first(queue)) == 2);
+    assert(size(queue) == 3);
+    assert(is_empty(queue) == false);
     print_queue(queue); // 2 - 5 - 3 - 
 
     // Remove 2
     int *rem_elem = (int*) dequeue(queue);
-    printf("The removed element is %d\n", *rem_elem); // The removed element is 2
-    printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 5
-    printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 2
-    printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
+    assert(*rem_elem == 2);
+    assert((*(int*) first(queue)) == 5);
+    assert(size(queue) == 2);
+    assert(is_empty(queue) == false);
     print_queue(queue); // 5 - 3 - 
 
     // Remove 5
     rem_elem = (int*) dequeue(queue);
-    printf("The removed element is %d\n", *rem_elem); // The removed element is 5
-    printf("The first element in the queue is %d\n", *(int*) first(queue)); // The first element in the queue is 3
-    printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 1
-    printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 0 (False);
+    assert(*rem_elem == 5);
+    assert((*(int*) first(queue)) == 3);
+    assert(size(queue) == 1);
+    assert(is_empty(queue) == false);
     print_queue(queue); // 3 - 
 
     // Remove 3
     rem_elem = (int*) dequeue(queue);
-    printf("The removed element is %d\n", *rem_elem); // The removed element is 3
-     if (first(queue) == NULL) {
-        printf("First is NULL because the queue is empty\n"); // This should print
-    }
-    else {
-        printf("First is not NULL, but it should be");
-    }
-    printf("The size of the queue is %d\n", size(queue)); // The size of the queue is 0
-    printf("Is the queue empty? %d\n", is_empty(queue)); // Is the queue empty? 1 (True);
+    assert(*rem_elem == 3);
+    assert(first(queue) == NULL);
+    assert(size(queue) == 0);
+    assert(is_empty(queue) == true);
     print_queue(queue); // Prints nothing
 
     // Try to dequeue, but it's NULL as there is nothing in the list
-    if (dequeue(queue) == NULL) {
-        printf("Dequeue is NULL because the queue is empty\n"); // This should print
-    }
-    else {
-        printf("Dequeue should be NULL, but it isn't");
-    }
+    assert(dequeue(queue) == NULL);
 
     // Add back in to ensure destroy_queue frees all nodes and the queue itself
-    printf("Adding a back in now\n");
     enqueue(queue, a);
     print_queue(queue); // 2 - 
+    assert((*(int*) first(queue)) == 2);
+    assert(size(queue) == 1);
+    assert(is_empty(queue) == false);
 
     free(a);
     free(b);
